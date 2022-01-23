@@ -11,9 +11,9 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='accounts/login.html',
                                            authentication_form=LoginForm), name='login'),
 
+    path('', views.userspage, name="users"),
     path('signup/', views.signup, name="signup"),
     path("logout/", views.logout_view, name="logout"),
-    path('users/', views.userspage, name="users"),
     path('accessattempts/', views.SystemAccessAttempts, name="accessattempts"),
     path('blockedusers/', views.BlockedUsers, name="blockedusers"),
     # path("blocks/username/<path:username>/unblock",unblock_username_view,name="defender_unblock_username_view"),
