@@ -2,7 +2,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import login, authenticate, logout,get_user_model
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse, HttpResponseRedirect
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.db import IntegrityError
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_bytes
@@ -36,7 +36,7 @@ User =get_user_model()
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None

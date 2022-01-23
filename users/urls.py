@@ -26,8 +26,6 @@ urlpatterns = [
     path('userprofile/', views.UserProfile, name="userprofile"),
     path('signature_upload/<int:pk>/', views.SignatureUpload, name="signature_upload"),
 
-    path('ituser_logs/<int:pk>/', views.UserauditTrail, name='ituser_logs'),
-
     path('password/', views.change_password, name="change_password"),
 
     path('activate/<int:user_id>/', views.user_activate, name="activate_user"),
