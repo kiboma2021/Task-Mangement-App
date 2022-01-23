@@ -1,0 +1,20 @@
+{% autoescape off %}
+Hi {{ filteruser.first_name }},
+
+Your user profile has been updated in Liberty LSP System.
+
+Your profile is now as below:
+
+Username: {{ filteruser.username }}
+First Name: {{ filteruser.first_name }}
+Last Name: {{ filteruser.last_name }}
+Role: {{ filteruser.role }}
+Email: {{ filteruser.email }}
+Phone No: {{ filteruser.phone_number }}
+User Activated: {{ filteruser.is_active }}
+
+
+Regards,
+System Support Team
+
+{% endautoescape %}

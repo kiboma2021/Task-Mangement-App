@@ -1,0 +1,277 @@
+<html>
+<head>
+  {%load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon1.ico' %}">
+  <title>Liberty Life Assurance(K) LSP_System</title>
+
+ 
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/select2.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/dataTables.bootstrap4.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap-datetimepicker.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css'%}">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <script src="{% static 'assets/js/jquery-3.5.1.js'%}"></script>
+  <script src="{% static 'assets/js/Chart.bundle.js'%}"></script>
+  <!--script src="{% static 'assets/js/chart.js'%}"></script-->
+
+</head>
+
+
+<div class="main-wrapper">
+  <div class="header">
+<div class="header-left">
+  <a href="/" class="logo">
+    <span>Liberty Assurance</span>
+  </a>
+</div>
+<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+      <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+      <ul class="nav user-menu float-right">
+          
+          <li class="nav-item dropdown has-arrow">
+              <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                  <span class="user-img">
+        <img class="rounded-circle" src="{% static 'assets/img/user.jpg'%}" width="24" alt="Admin">
+        <span class="status online"></span>
+      </span>
+      <span>{{ request.user.username }}</span>
+              </a>
+              <div class="dropdown-menu" style="color:blue">
+                <a class="dropdown-item" style="color:blue" href="{% url 'users:change_password' %}">Change Password</a>
+                <a class="dropdown-item" style="color:blue" href="{% url 'users:userprofile' %}">My Profile</a>
+                <a class="dropdown-item" style="color:blue" href="{% url 'users:logout' %}">Logout</a>
+              </div>
+          </li>
+      </ul>
+  </div>
+  <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+          <div id="sidebar-menu" class="sidebar-menu">
+              <ul>
+                <br>
+                <li>
+                <a href="/" class="logo">
+                  <img src="{% static 'assets/img/logo.png'%}" width="120" height="100" alt="">
+                </a>
+                </li>
+
+                {% if user.role == 'Premium Processing-PP' or user.role == 'Premium Processing-Manager PP' %}    
+
+                  <li>
+                      <a href="/"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a>
+                  </li>                
+                  <li>
+                      <a href="{% url 'checkoff:checkoff' %}"><i class="fa fa-book"></i> <span>CheckOff</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'checkoff:clients' %}"><i class="fa fa-users"></i> <span>Policyholders</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'checkoff:accounts' %}"><i class="fa fa-money"></i> <span>Accounts</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'checkoff:reports' %}"><i class="fa fa-pie-chart"></i> <Reports>Communication Report</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'checkoff:knowledge_center' %}"><i class="fas fa-user-graduate"></i> <Reports>Knowledge Repository</span></a>
+                  </li>       
+                  <li>
+                    <a href="{% url 'checkoff:task_management' %}"><i class="fa fa-tasks"></i> <Reports>Task Management</span></a>
+                  </li>     
+
+                  <li class="menu-title">Setttings</li>
+
+                  <li>
+                    <a href="{% url 'users:change_password' %}"><i class="fa fa-user"></i> <span>Change Password</span></a>
+                  </li>                                               
+ 
+                  <li>
+                    <a href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> <span>Log out</span></a>
+                  </li>                      
+
+                  <li class="menu-title">Archives</li>
+
+                  <li>
+                    <a href="{% url 'checkoff:deleted' %}"><i class="fa fa-trash"></i> <span>Deleted</span></a>
+                  </li>                                               
+ 
+                  {% endif %}
+
+
+                  {% if user.role == 'Premium Processing-Others' %}    
+              
+                  <li>
+                      <a href="{% url 'checkoff:checkoffotherusers' %}"><i class="fa fa-book"></i> <span>CheckOffs</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'checkoff:reports' %}"><i class="fa fa-pie-chart"></i> <Reports>Communication Report</span></a>
+                  </li>
+ 
+                  <li class="menu-title">Setttings</li>
+
+                  <li>
+                    <a href="{% url 'users:change_password' %}"><i class="fa fa-user"></i> <span>Change Password</span></a>
+                  </li>                                               
+ 
+                  <li>
+                    <a href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> <span>Log out</span></a>
+                  </li>                                                               
+ 
+                  {% endif %}
+
+
+                  {% if user.role == 'GL Claims- Claims' %}
+
+                  <li>
+                      <a href="/"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a>
+                  </li>
+                
+                  <li>
+                      <a href="{% url 'claims:scheme_page' %}"><i class="fa fa-book"></i> <span>Schemes</span></a>
+                  </li>
+         
+                  <li>
+                    <a href="{% url 'claims:claims' %}"><i class="fa fa-money"></i> <span>Claims</span></a>
+                  </li>
+
+                  <li>
+                    <a href="{% url 'claims:claims_report' %}"><i class="fa fa-pie-chart"></i> <span>Extract Reports</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'claims:claimcausepage' %}"><i class="fa fa-plus"></i> <span>Cause of Claim</span></a>
+                  </li>
+
+                  <li class="menu-title">Setttings</li>
+
+                  <li>
+                    <a href="{% url 'users:change_password' %}"><i class="fa fa-user"></i> <span>Change Password</span></a>
+                  </li>                                               
+ 
+                  <li>
+                    <a href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Log out</span></a>
+                  </li>                      
+
+                  {% endif %}
+
+                  {% if user.role == 'GL Underwriting- UND' or user.role == 'GL Underwriting- Finance' or user.role == 'GL Underwriting- BDE' or user.role == 'GL Underwriting- Acturial' or user.role == 'GL Underwriting- Others' %}  
+
+                  <li>
+                      <a href="/"><i class="fa fa-bar-chart"></i> <span>Summary Reports</span></a>
+                  </li>
+                
+                  <li>
+                      <a href="{% url 'underwriting:schemes_und' %}"><i class="fa fa-book"></i> <span>All Schemes</span></a>
+                  </li>
+
+                  <li>
+                    <a href="{% url 'underwriting:membersfpp' %}"><i class="fa fa-users"></i> <span>Members (FPP)</span></a>
+                </li>
+
+                  <li>
+                    <a href="{% url 'underwriting:accounts_und' %}"><i class="fa fa-money"></i> <span>Trasaction Accounts</span></a>
+                  </li>
+
+                  <li>
+                    <a href="{% url 'underwriting:receivablesreport' %}"><i class="fa fa-pie-chart"></i> <span>Receivables Report</span></a>
+                  </li>
+
+                  <li>
+                    <a href="{% url 'underwriting:agingreport' %}"><i class="fa fa-line-chart"></i> <span>Aging Report</span></a>
+                  </li>
+
+                  <li>
+                    <a href="{% url 'underwriting:schemebalances' %}"><i class="fa fa-envelope-square"></i> <span>Email Debtors</span></a>
+                  </li>                  
+
+                  <li>
+                    <a href="{% url 'underwriting:claimsreport' %}"><i class="fa fa-users"></i> <span>Claims Report</span></a>
+                  </li>    
+
+                  <li>
+                    <a href="{% url 'bdetool:bdequotes' %}"><i class="fa fa-book"></i> <span>BDE Quote</span></a>
+                  </li>   
+
+                  <li class="menu-title">Setttings</li>
+
+                  <li>
+                    <a href="{% url 'users:change_password' %}"><i class="fa fa-user"></i> <span>Change Password</span></a>
+                  </li>                                               
+ 
+                  <li>
+                    <a href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Log out</span></a>
+                  </li>                      
+
+                  {% endif %}
+
+ 
+                  {% if user.role == 'IT Department' %}   
+
+                  <li>
+                    <a href="{% url 'users:users' %}"><i class="fa fa-users"></i> <span>Users</span></a>
+                  </li>  
+                  <li>
+                    <a href="{% url 'users:accessattempts' %}"><i class="fas fa-user-lock"></i> <span>Access Attempts</span></a>
+                  </li>  
+                  <li>
+                    <a href="{% url 'users:blockedusers' %}"><i class="fas fa-lock"></i> <span>Blocked Users</span></a>
+                  </li>  
+
+
+                  <li class="menu-title">Setttings</li>
+
+                  <li>
+                    <a href="{% url 'users:change_password' %}"><i class="fa fa-user"></i> <span>Change My Password</span></a>
+                  </li> 
+                  <li>
+                    <a href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Log out</span></a>
+                  </li>     
+                  {% endif %}
+              </ul>
+          </div>
+      </div>
+  </div>
+
+  <div class="page-wrapper">
+    <div class="content">
+      {%block content%}
+      {%endblock%}
+      </div>
+      </div>
+</div>
+
+{%block javascript%} {%endblock%}
+
+<script src="{% static 'assets/js/popper.min.js'%}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'assets/js/select2.min.js'%}"></script>
+<script src="{% static 'assets/js/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'assets/js/moment.min.js'%}"></script>
+<script src="{% static 'assets/js/app.js'%}"></script>
+<script src="{% static 'assets/js/dataTables.bootstrap4.min.js'%}"></script>
+<script src="{% static 'assets/js/a076d05399.js'%}"></script>
+<script src="{% static 'assets/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+<div class="sidebar-overlay" data-reff=""></div>
+<script src="{% static 'assets/js/jquery.slimscroll.js'%}"></script>
+<script src="{% static 'assets/js/bootstrap-datetimepicker.min.js'%}"></script>
+<script src="{% static 'assets/js/Chart.min.js'%}"></script>
+<script src="{% static 'assets/js/dataTables.buttons.min.js'%}"></script>
+<script src="{% static 'assets/js/jszip.min.js'%}"></script>
+
+<script src="{% static 'assets/js/pdfmake.min.js'%}"></script>
+<script src="{% static 'assets/js/vfs_fonts.js'%}"></script>
+<script src="{% static 'assets/js/buttons.html5.min.js'%}"></script>
+<script src="{% static 'assets/js/buttons.print.min.js'%}"></script>
+<script src="{% static 'assets/js/printThis.js'%}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
+</body>
+</html>

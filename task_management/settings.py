@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +26,7 @@ SECRET_KEY = 'x16586_mivq7rq3-=25mx1rj92a-$iw(i1gph=d*9ga+w$1si9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
+    #3rd party
+    'users',
+    'simple_history',
+    'bootstrap4',
+    'crispy_forms',
+    'defender',
+ 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,14 +59,25 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'simple_history.middleware.HistoryRequestMiddleware',
+
 ]
+
+DEFENDER_LOCKOUT_TEMPLATE='accounts/login_locked.html'
+DEFENDER_COOLOFF_TIME=600
+DEFENDER_DISABLE_IP_LOCKOUT=True
+
+DEFENDER_REDIS_URL = "redis://localhost:6379/1"
+DEFENDER_MOCK_REDIS = False
+
 
 ROOT_URLCONF = 'task_management.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/ "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -85,27 +109,38 @@ DATABASES = {
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
+
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
+    }, {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
+        'OPTIONS': {'min_length': 8, }
+    }, {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
+    }, {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    }, {
+        'NAME': 'users.validators.NumberValidator',
+    }, {
+        'NAME': 'users.validators.DontRepeatValidator',
+        'OPTIONS': {'history': 12}
+    }, {
+        'NAME': 'users.validators.UppercaseValidator',
+    }, {
+        'NAME': 'users.validators.LowercaseValidator',
+    }, {
+        'NAME': 'users.validators.SymbolValidator',
     },
+
+
 ]
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -117,4 +152,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_ROOT = BASE_DIR/ 'staticfiles'
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    BASE_DIR/ 'static',
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
+
+
+AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend' #during development only
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND 
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='kibstechnologies2021@gmail.com'
+EMAIL_HOST_PASSWORD='hvwipoxlbxupjrmr'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL =EMAIL_HOST_USER  #'Liberty LSP System <nonreply@libertylife.co.ke>'
+

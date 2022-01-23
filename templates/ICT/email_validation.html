@@ -1,0 +1,24 @@
+{% autoescape off %}
+Hi {{ user.first_name }},
+
+You have been created as {{ user.role }} in the  Liberty Life LSP System.
+
+Please click the following link to confirm your registration:
+
+http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}
+
+Your credentials are as below:
+
+Username: {{ user.username }}
+Password: {{password}}
+
+Please change your password upon login.
+
+If you didnt request for registration then just ignore this email. 
+
+The link is active for only 12 hours
+
+Regards,
+System Support Team
+
+{% endautoescape %}

@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+{% load static %}
+
+{%block content%}
+
+
+		<div class="form-row">
+			<div class="form-group col-md-6 mb-0">
+				<h4 style="color:#1b0470" class="page-title">Blocked Users </h4>
+			</div>
+		</div>				
+
+		 <br>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="table-responsive" >
+					<table class="table table-border table-striped  custom-table mb-0">
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for block in blocked_username_list %}
+							
+							<tr style="color:black" >
+
+								<td>{{block}}</td>
+								<td>
+									<form method='POST' action="{% url 'users:unblockuser' block %}">
+										{% csrf_token %}
+										<input type='submit' class="btn btn-primary" value='unblock' />
+									</form>
+								</td>			
+							
+							</tr>
+							{% empty %}
+							<tr>
+								<td colspan='2'>No user is blocked</td>
+							</tr>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+
+
+{%endblock%}
+
+

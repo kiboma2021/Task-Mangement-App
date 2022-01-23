@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+{%block content%}
+
+
+<div class="row">
+  <button onclick="goBack()" style="font-size:24px"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+</div>  
+
+<br>
+<div class="row">
+  <div class="col-sm-4 col-3">
+      <h4 style="color:#1b0470" class="page-title">MY USER PROFILE</h4>
+  </div>	
+</div>    
+
+{% for i in users %}
+<div class="card-body">                             
+  <div class="row custom-invoice">
+    <table class="table table-responsive">
+      <tbody style="background-color:white">	
+          <tr style="color:black">
+              <td>Username:</td>
+              <td style="color: rgb(19, 9, 148);">{{i.username }} </td>
+							<td>
+								<a href="{% url 'underwriting:emaildebtorletter' i.id %}" class="btn btn btn-success disabled"> Update</a>
+							</td>	
+
+            </tr>
+            <tr style="color:black">
+                <td>First Name: </td>
+                <td style="color: rgb(19, 9, 148);">{{i.first_name}} </td>
+                <td>
+                  <a href="{% url 'underwriting:emaildebtorletter' i.id %}" class="btn btn btn-success disabled"> Update</a>
+                </td>	
+              </tr>      
+            <tr style="color:black">
+                <td>Last Name: </td>
+                <td style="color: rgb(19, 9, 148);">{{i.last_name}} </td>
+                <td>
+                  <a href="{% url 'underwriting:emaildebtorletter' i.id %}" class="btn btn btn-success disabled"> Update</a>
+                </td>	
+              </tr>
+            <tr style="color:black">
+              <td>Email: </td>
+              <td style="color: rgb(19, 9, 148);">{{i.email}} </td>
+							<td>
+								<a href="{% url 'underwriting:emaildebtorletter' i.id %}" class="btn btn btn-success disabled"> Update</a>
+							</td>	
+            </tr>
+            <tr style="color:black">
+              <td>Role: </td>
+              <td style="color: rgb(19, 9, 148);"> {{i.role}}</td>
+							<td>
+								<a href="{% url 'underwriting:emaildebtorletter' i.id %}" class="btn btn btn-success disabled"> Update</a>
+							</td>	
+            </tr>    
+          <tr style="color:black">
+            <td>Phone Number: </td>
+            <td style="color: rgb(19, 9, 148);">{{i.phone_number}} </td>
+            <td>
+              <a href="{% url 'underwriting:emaildebtorletter' i.id %}" class="btn btn btn-success disabled"> Update</a>
+            </td>	
+          </tr>
+          <tr style="color:black">
+            <td>Signature: </td>
+            {% if i.signature %}
+            <td style="color: rgb(19, 9, 148);"><img src="{{ i.signature.url }}" alt="" style="float:left;width:100px;height:70px;" > </td>
+            {% else %}
+            <td style="color: rgb(19, 9, 148);"><img src="" alt="Signature Not Uploaded" style="float:left;width:100px;height:70px;" > </td>
+            {% endif %}
+            <td>
+               <a href="{% url 'users:signature_upload' i.id  %}" class="btn btn btn-success"> Update</a>
+            </td>	 
+          </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endfor %}
+
+
+{%endblock%}
+
+{%block javascript %}
+
+<script>
+
+function goBack() {
+  window.history.back();
+}
+
+</script>
+
+{%endblock%}

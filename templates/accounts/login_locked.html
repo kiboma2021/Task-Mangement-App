@@ -1,0 +1,59 @@
+
+{% extends 'layouts/base-fullscreen.html' %}
+
+{% block title %} Login {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock stylesheets %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Page content -->
+
+
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        p {
+          text-align: center;
+          font-size: 60px;
+          margin-top: 0px;
+        }
+        </style>
+        </head>
+        <body>
+
+        <h2 style="color: red;">Your account has been locked due to too many failed attempts. Please try again or reset your password after ten minutes. </h2>          
+        <p style="color: red;" id="countdown"></p>
+
+        <p style="color: white;"><a style="color: white;" href="/"> Log In</a></p>
+        
+        <script>
+
+          var timeleft = 600;
+          var downloadTimer = setInterval(function(){
+            
+            if(timeleft <= 0){
+              clearInterval(downloadTimer);
+              document.getElementById("countdown").innerHTML = "Account unlocked!";
+            } else {
+              document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+            }
+            timeleft -= 1;
+          }, 1000);
+
+        </script>
+        
+        </body>
+
+
+
+{% endblock content %}
+
+

@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+{% load static %}
+
+{%block content%}
+
+<div class="row">
+    <button onclick="goBack()" style="font-size:24px"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+</div>  
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table id="ClaimsTable" class="table table-border table-striped custom-table datatable mb-0">
+								<thead>
+									<tr>
+										<th>First Name</th>
+										<th>Last Name</th>
+										<th>Role</th>
+										<th>Phone Number</th>	
+										<th>Date</th>
+										<th>User </th>
+									</tr>
+								</thead>
+								<tbody style="background-color:white">
+
+									{% for i in user_hist %}
+									<tr>
+										<td>{{i.first_name}} {{i.history_user_id}} </td>
+										<td>{{i.last_name}}</td>
+                                        <td>{{i.role}}</td>
+										<td>{{i.phone_number}}</td>
+										<td>{{i.history_date}}</td>
+										<td>{{i.history_user.username}}</td>
+
+									</tr>
+								    {% endfor %} 
+								</tbody>
+							</table>
+						</div>
+					</div>
+                </div>
+           
+{%endblock%}
+
+
+{%block javascript %}
+
+<script>
+
+function goBack() {
+  window.history.back();
+}
+
+</script>
+
+{%endblock%}

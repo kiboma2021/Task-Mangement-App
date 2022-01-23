@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+{%block content%}
+
+  <div class="row">
+    <button onclick="goBack()" style="font-size:24px"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+  </div>  
+  <br>
+
+  <form enctype="multipart/form-data" method="post" class="form">
+    
+    <h3 style="color:blue" class="modal-title">Signature for: {{users.first_name}} {{users.last_name}}  </h3>
+    {% csrf_token %}
+
+    {{form.errors }}
+    {% bootstrap_form form %}
+
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Add Signature</button>
+    {% endbuttons %}
+    
+</form>
+
+{%endblock%}
+
+{%block javascript %}
+
+<script>
+
+function goBack() {
+  window.history.back();
+}
+
+</script>
+
+{%endblock%}
