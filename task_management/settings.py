@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     #3rd party
     'users',
+    'dashboard',
     'simple_history',
     'bootstrap4',
     'crispy_forms',

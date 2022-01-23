@@ -92,7 +92,7 @@ def EditUser(request,pk):
             filteruser = form.save(commit=False)
             filteruser.save()
             current_site = get_current_site(request)
-            subject = 'Liberty LSP System'
+            subject = 'XYZ Insurance TMS'
 
             message = render_to_string('ICT/email_edituser.html', {
                 'filteruser': filteruser,
@@ -122,6 +122,8 @@ def SystemAccessAttempts(request):
     successful_logs=AccessAttempt.objects.filter(login_valid=True).count()
     failed_logs=AccessAttempt.objects.filter(login_valid=False).count()
 
+    print("-----")
+    print(access_logs)
 
     context={'access_logs':access_logs,'successful_logs':successful_logs,'failed_logs':failed_logs }      
     return render (request, 'ICT/users_access_attempts.html',context)

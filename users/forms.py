@@ -16,7 +16,7 @@ class UserEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name','last_name','role','phone_number','is_active')
+        fields = ('first_name','last_name','role','phone_number','is_active','department')
 
 
 class LoginForm(AuthenticationForm):
