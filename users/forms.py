@@ -8,14 +8,8 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'role', 'phone_number',)
+        fields = ('username', 'first_name', 'last_name', 'email', 'role', 'department', 'phone_number',)
         #exclude =('password', 'password1')
-
-    def clean_email(self,*args,**kwargs):
-        email=self.cleaned_data.get("email")
-        if not email.endswith(("@libertylife.co.ke","@heritage.co.ke")):
-            raise forms.ValidationError("Email has incorrect organisation domain")    
-        return email
 
 
 class UserEditForm(forms.ModelForm):

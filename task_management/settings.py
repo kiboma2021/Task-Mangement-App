@@ -109,32 +109,24 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
 
+AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    }, {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS': {'min_length': 8, }
-    }, {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    }, {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    }, {
-        'NAME': 'users.validators.NumberValidator',
-    }, {
-        'NAME': 'users.validators.DontRepeatValidator',
-        'OPTIONS': {'history': 12}
-    }, {
-        'NAME': 'users.validators.UppercaseValidator',
-    }, {
-        'NAME': 'users.validators.LowercaseValidator',
-    }, {
-        'NAME': 'users.validators.SymbolValidator',
     },
-
-
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
+
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 DATE_INPUT_FORMATS = ['%d-%m-%Y']

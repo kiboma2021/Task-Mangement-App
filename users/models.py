@@ -17,17 +17,19 @@ from django.utils.timezone import localtime
 
 
 DEPARTMENT=(
+        ('IT','IT'),
+        ('Business Operations','Business Operations'),   
         ('Customer Service','Customer Service'),      
         ('Claims','Claims'),
         ('Finance','Finance'),       
+        ('Group Life Underwriting','Group Life Underwriting'),   
         ('Premium Processing','Premium Processing'),   
-        ('Pensions','Pensions'),   
-        ('Business Operations','Business Operations'),   
-        ('Group Life Underwriting','Group Life Underwriting'),       
+        ('Pensions','Pensions'),       
         ('Retail Underwriting','Retail Underwriting'),     
   
     )
 ROLE=(
+        ('System Admin','System Admin'), 
         ('Analyst','Analyst'),      
         ('Specialist','Specialist'),
         ('Manager','Manager'),    
@@ -43,6 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=150)
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(("date joined"), auto_now_add=True)
     date_updated= models.DateField(auto_now=True)
     department = models.CharField(max_length=200, null=True, choices=DEPARTMENT)

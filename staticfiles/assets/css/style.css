@@ -821,11 +821,11 @@ textarea.form-control {
 -----------------------*/
 
 .sidebar {
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 2px 0 red;
 	top: 50px;
 	width: 230px;
 	z-index: 1039;
-	background-color:rgba(23, 4, 128, 0.925);
+	background-color:red;
 	bottom: 0;
 	margin-top: 0px;
 	position: fixed;
@@ -859,7 +859,7 @@ textarea.form-control {
 }
 .sidebar-menu li.active a {
 	color: #009efb;
-	background-color: #0b0c0c;
+	background-color: red;
 }
 .menu-title {
 	color: black;
@@ -1122,7 +1122,7 @@ textarea.form-control {
 -----------------------*/
 
 .dash-widget {
-	background-color: rgb(32, 15, 185);
+	background-color: red;
 	border-radius: 4px;
 	margin-bottom: 30px;
 	padding: 20px;

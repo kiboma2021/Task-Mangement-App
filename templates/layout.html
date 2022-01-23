@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon1.ico' %}">
-  <title>Liberty Life Assurance(K) LSP_System</title>
+  <title>XYZ Insurance(Kenya)</title>
 
  
   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css'%}">
@@ -30,7 +30,7 @@
   <div class="header">
 <div class="header-left">
   <a href="/" class="logo">
-    <span>Liberty Assurance</span>
+    <span>XYZ Insurance</span>
   </a>
 </div>
 <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
@@ -162,58 +162,8 @@
 
                   {% endif %}
 
-                  {% if user.role == 'GL Underwriting- UND' or user.role == 'GL Underwriting- Finance' or user.role == 'GL Underwriting- BDE' or user.role == 'GL Underwriting- Acturial' or user.role == 'GL Underwriting- Others' %}  
-
-                  <li>
-                      <a href="/"><i class="fa fa-bar-chart"></i> <span>Summary Reports</span></a>
-                  </li>
-                
-                  <li>
-                      <a href="{% url 'underwriting:schemes_und' %}"><i class="fa fa-book"></i> <span>All Schemes</span></a>
-                  </li>
-
-                  <li>
-                    <a href="{% url 'underwriting:membersfpp' %}"><i class="fa fa-users"></i> <span>Members (FPP)</span></a>
-                </li>
-
-                  <li>
-                    <a href="{% url 'underwriting:accounts_und' %}"><i class="fa fa-money"></i> <span>Trasaction Accounts</span></a>
-                  </li>
-
-                  <li>
-                    <a href="{% url 'underwriting:receivablesreport' %}"><i class="fa fa-pie-chart"></i> <span>Receivables Report</span></a>
-                  </li>
-
-                  <li>
-                    <a href="{% url 'underwriting:agingreport' %}"><i class="fa fa-line-chart"></i> <span>Aging Report</span></a>
-                  </li>
-
-                  <li>
-                    <a href="{% url 'underwriting:schemebalances' %}"><i class="fa fa-envelope-square"></i> <span>Email Debtors</span></a>
-                  </li>                  
-
-                  <li>
-                    <a href="{% url 'underwriting:claimsreport' %}"><i class="fa fa-users"></i> <span>Claims Report</span></a>
-                  </li>    
-
-                  <li>
-                    <a href="{% url 'bdetool:bdequotes' %}"><i class="fa fa-book"></i> <span>BDE Quote</span></a>
-                  </li>   
-
-                  <li class="menu-title">Setttings</li>
-
-                  <li>
-                    <a href="{% url 'users:change_password' %}"><i class="fa fa-user"></i> <span>Change Password</span></a>
-                  </li>                                               
  
-                  <li>
-                    <a href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Log out</span></a>
-                  </li>                      
-
-                  {% endif %}
-
- 
-                  {% if user.role == 'IT Department' %}   
+                  {% if user.role == 'System Admin' %}   
 
                   <li>
                     <a href="{% url 'users:users' %}"><i class="fa fa-users"></i> <span>Users</span></a>
